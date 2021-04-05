@@ -13,17 +13,17 @@ int Szh_ek001::SetupPin()
     return -1;
   }
 
-  pinMode(pin_ENA, OUTPUT);
-  pinMode(pin_ENB, OUTPUT);
+  pinMode(pin_ENA_, OUTPUT);
+  pinMode(pin_ENB_, OUTPUT);
 
-  pinMode(pin_IN1, OUTPUT);
-  pinMode(pin_IN2, OUTPUT);
+  pinMode(pin_IN1_, OUTPUT);
+  pinMode(pin_IN2_, OUTPUT);
 
-  pinMode(pin_IN3, OUTPUT);
-  pinMode(pin_IN4, OUTPUT);
+  pinMode(pin_IN3_, OUTPUT);
+  pinMode(pin_IN4_, OUTPUT);
 
-  softPwmCreate(pin_ENA, 0, 200);
-  softPwmCreate(pin_ENB, 0, 200);
+  softPwmCreate(pin_ENA_, 0, 200);
+  softPwmCreate(pin_ENB_, 0, 200);
 
   ROS_INFO("Success Setup WiringPI");
   return 0;
@@ -31,12 +31,14 @@ int Szh_ek001::SetupPin()
 
 int Szh_ek001::GetROSParam(ros::NodeHandle &n)
 {
-  n.param<int>("IN1", pin_IN1 ,21);
-  n.param<int>("IN2", pin_IN2 ,20);
-  n.param<int>("IN3", pin_IN3 ,23);
-  n.param<int>("IN4", pin_IN4 ,24);
-  n.param<int>("ENA", pin_ENA ,12);
-  n.param<int>("ENB", pin_ENB ,13);
+  n.param<int>("IN1", pin_IN1_, 21);
+  n.param<int>("IN2", pin_IN2_, 20);
+  n.param<int>("IN3", pin_IN3_, 23);
+  n.param<int>("IN4", pin_IN4_, 24);
+  n.param<int>("ENA", pin_ENA_, 12);
+  n.param<int>("ENB", pin_ENB_, 13);
+
+  n.param<int>("min_value", min_value_, 20);
 
   return 0;
 }
@@ -48,23 +50,77 @@ int Szh_ek001::Spin()
 
 void Szh_ek001::CmdVelCallback(const geometry_msgs::Twist &cmd_vel)
 {
-  int value = round(cmd_vel.linear.x * 100);
-  std::cout << value << std::endl;
-  if(value > 0)
+  int value_x = round(cmd_vel.linear.x * 100);
+  int value_z = round(cmd_vel.angular.z * 100);
+
+  int rpm_L = value_x + value_z;
+  int rpm_R = value_x - value_z;
+
+//  softPwmWrite(pin_ENA_, rpm_L);
+//  softPwmWrite(pin_ENB_, rpm_R);
+
+  if(rpm_L > 0)
   {
-    softPwmWrite(pin_ENA, value+100);
- //   softPwmWrite(pin_ENB, value+50);
+    softPwmWrite(pin_ENA_, rpm_L + min_value_);
+
+    digitalWrite(pin_IN2_,HIGH);
+    digitalWrite(pin_IN1_,LOW);
   }
-  if(value ==0)
+  else if(rpm_L < 0)
   {
-    softPwmWrite(pin_ENA, 0);
-//    softPwmWrite(pin_ENB, 0);
+    softPwmWrite(pin_ENA_, abs(rpm_L - min_value_));
+
+    digitalWrite(pin_IN2_,LOW);
+    digitalWrite(pin_IN1_,HIGH);
+  }
+  else if(rpm_L == 0)
+  {
+    softPwmWrite(pin_ENA_, 0);
+
+    digitalWrite(pin_IN2_,LOW);
+    digitalWrite(pin_IN1_,LOW);
   }
 
-  digitalWrite(20,HIGH);
-  digitalWrite(21,LOW);
-  digitalWrite(23,HIGH);
-  digitalWrite(24,LOW);
+  if(rpm_R > 0)
+  {
+    softPwmWrite(pin_ENB_, rpm_R + min_value_);
+
+    digitalWrite(pin_IN3_,HIGH);
+    digitalWrite(pin_IN4_,LOW);
+  }
+  else if(rpm_R < 0)
+  {
+    softPwmWrite(pin_ENB_, abs(rpm_R - min_value_));
+
+    digitalWrite(pin_IN3_,LOW);
+    digitalWrite(pin_IN4_,HIGH);
+  }
+  else if(rpm_R == 0)
+  {
+    softPwmWrite(pin_ENB_, 0);
+
+    digitalWrite(pin_IN3_,LOW);
+    digitalWrite(pin_IN4_,LOW);
+  }
+
+//  std::cout << value << std::endl;
+
+/*  if(value > 0)
+  {
+    softPwmWrite(pin_ENA_, value_x + min_value_ + value_z);
+    softPwmWrite(pin_ENB_, value_x + min_value_ - value_z);
+  }
+  if(value == 0)
+  {
+    softPwmWrite(pin_ENA_, 0);
+    softPwmWrite(pin_ENB_, 0);
+  }
+*/
+
+//  digitalWrite(pin_IN2_,HIGH);
+//  digitalWrite(pin_IN1_,LOW);
+//  digitalWrite(pin_IN3_,HIGH);
+//  digitalWrite(pin_IN4_,LOW);
 
 }
 

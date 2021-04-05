@@ -32,12 +32,14 @@ public:
     void CmdVelCallback(const geometry_msgs::Twist &cmd_vel);
 
 private:
-  int pin_IN1;
-  int pin_IN2;
-  int pin_IN3;
-  int pin_IN4;
-  int pin_ENA;
-  int pin_ENB;
+  int pin_IN1_;
+  int pin_IN2_;
+  int pin_IN3_;
+  int pin_IN4_;
+  int pin_ENA_;
+  int pin_ENB_;
+
+  int min_value_;
 
   ros::Subscriber subscriber_cmd_vel_;
 
