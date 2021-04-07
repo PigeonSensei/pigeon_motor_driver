@@ -3,7 +3,7 @@
 
 #include <ros/ros.h>
 
-#include "l298n/MotorCommand.h"
+#include "motor_driver_msgs/MotorCommand.h"
 #include "l298n/SetMotorDriver.h"
 
 #include <wiringPi.h>
@@ -39,7 +39,7 @@ public:
     bool SetMotorDriverServiceCallback(l298n::SetMotorDriver::Request &req,
                                       l298n::SetMotorDriver::Response &res);
 
-    void MotorCommandCallback(const l298n::MotorCommand &data);
+    void MotorCommandCallback(const motor_driver_msgs::MotorCommand &data);
 
     int DoStop();
 
@@ -62,7 +62,7 @@ private:
 
   Switch switch_;
 
-  l298n::MotorCommand motor_command_;
+  motor_driver_msgs::MotorCommand motor_command_;
 
   ros::Subscriber subscriber_motor_command_;
 

@@ -7,6 +7,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   message_generation
   std_msgs
+  motor_driver_msgs
 )
 
 find_package(Boost REQUIRED COMPONENTS system)
@@ -44,7 +45,7 @@ generate_messages(
 catkin_package(
   INCLUDE_DIRS include
 #  LIBRARIES l298n
-  CATKIN_DEPENDS roscpp message_runtime message_generation std_msgs
+  CATKIN_DEPENDS roscpp message_runtime message_generation std_msgs motor_driver_msgs
 #  DEPENDS system_lib
 )
 

@@ -71,7 +71,7 @@ bool L298N::SetMotorDriverServiceCallback(l298n::SetMotorDriver::Request &req,
   }
 }
 
-void L298N::MotorCommandCallback(const l298n::MotorCommand &data)
+void L298N::MotorCommandCallback(const motor_driver_msgs::MotorCommand &data)
 {
   motor_command_.command_L = data.command_L;
   motor_command_.command_R = data.command_R;
