@@ -18,10 +18,10 @@ set (wiringPi_include "/use/local/include")
 ################################################
 
 ## Generate messages in the 'msg' folder
-add_message_files(
-  FILES
-  MotorCommand.msg
-)
+#add_message_files(
+#  FILES
+#  MotorCommand.msg
+#)
 
 ## Generate services in the 'srv' folder
 add_service_files(
