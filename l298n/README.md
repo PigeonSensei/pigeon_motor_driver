@@ -5,9 +5,9 @@ L298N Motor Driver Ros Package
 This Package is for RaspberryPi
 
 ### Dependency package
-- wiringPi
+- [wiringPi](http://wiringpi.com/download-and-install/)
 
-- motor_driver_msgs
+- [motor_driver_msgs](https://github.com/PigeonSensei/pigeon_motor_driver/tree/master/motor_driver_msgs)
 
 ### Run
 
