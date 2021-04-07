@@ -1,6 +1,6 @@
 # l298n
 
-L298N Motor Driver Package
+L298N Motor Driver Ros Package
 
 This Package is for RaspberryPi
 
