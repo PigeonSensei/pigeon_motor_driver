@@ -29,8 +29,9 @@ int L298N::SetupPin()
   return 0;
 }
 
-int L298N::GetROSParam(ros::NodeHandle &n)
+int L298N::GetROSParam()
 {
+  ros::NodeHandle n("~");
   n.param<int>("IN1", pin_IN1_, 21);
   n.param<int>("IN2", pin_IN2_, 20);
   n.param<int>("IN3", pin_IN3_, 23);
@@ -38,8 +39,13 @@ int L298N::GetROSParam(ros::NodeHandle &n)
   n.param<int>("ENA", pin_ENA_, 12);
   n.param<int>("ENB", pin_ENB_, 13);
 
-  n.param<int>("minimum_motor_command_", minimum_motor_command_, 20);
-  n.param<int>("maximum_motor_command_", maximum_motor_command_, 300);
+  n.param<int>("minimum_motor_command", minimum_motor_command_, 20);
+  n.param<int>("maximum_motor_command", maximum_motor_command_, 300);
+
+  ROS_INFO("IN1 : %d, IN2 : %d,  IN3 : %d, IN4 : %d, ENA : %d, ENB: %d",
+           pin_IN1_ ,pin_IN2_, pin_IN3_, pin_IN4_, pin_ENA_, pin_ENB_);
+  ROS_INFO("minimum_motor_command : %d, maximum_motor_command_ : %d",
+           minimum_motor_command_, maximum_motor_command_);
 
   return 0;
 }
@@ -67,6 +73,7 @@ bool L298N::SetMotorDriverServiceCallback(l298n::SetMotorDriver::Request &req,
   {
     res.result = "false";
     res.message = "Command that does not exist!";
+    ROS_INFO("Command that does not exist!");
     return false;
   }
 }
@@ -136,7 +143,7 @@ int L298N::DoGo(int command_L, int command_R)
     digitalWrite(pin_IN4_,LOW);
   }
 
-  std::cout << "command_L : " << command_L << ", " << "command_R : " << command_R << std::endl;
+  ROS_INFO("command_L : %d , command_R : %d", command_L, command_R);
 
   return 0;
 
@@ -171,8 +178,6 @@ int main(int argc, char **argv)
   ros::Rate loop_rate(60);
 
   L298N l298n(n);
-
-  l298n.SetupPin();
 
   while (ros::ok())
   {

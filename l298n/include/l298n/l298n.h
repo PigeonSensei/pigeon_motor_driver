@@ -18,7 +18,8 @@ public:
        {
           // open run
           ROS_INFO("l298n_node Open");
-          GetROSParam(n);
+          GetROSParam();
+          SetupPin();
        }
        ~L298N()
        {
@@ -34,7 +35,7 @@ public:
 
     int SetupPin();
 
-    int GetROSParam(ros::NodeHandle &n);
+    int GetROSParam();
 
     bool SetMotorDriverServiceCallback(l298n::SetMotorDriver::Request &req,
                                       l298n::SetMotorDriver::Response &res);

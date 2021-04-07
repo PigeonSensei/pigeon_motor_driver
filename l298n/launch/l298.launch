@@ -9,8 +9,8 @@
     <param name="IN4" type="int" value="24" />
     <param name="ENA" type="int" value="12" />
     <param name="ENB" type="int" value="13" />
-    <param name="minimum_motor_command_" type="int" value="20" />
-    <param name="maximum_motor_command_" type="int" value="300" />
+    <param name="minimum_motor_command" type="int" value="20" />
+    <param name="maximum_motor_command" type="int" value="300" />
   </node>
 
 </launch>
