@@ -62,7 +62,7 @@ roslaunch l298n l298n.launch
 
   minimum value of motor_command
   
-~ maximum_motor_command (int, default: 20)
+~ maximum_motor_command (int, default: 300)
 
-  minimum value of motor_command
+  maximum value of motor_command
 
