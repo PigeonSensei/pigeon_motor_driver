@@ -34,27 +34,27 @@ roslaunch l298n l298n.launch
 
 ### Parameters
 
-~ IN1 (int, default: 21)
+~ IN1 (int, default: -1)
 
   Gpio Pin number corresponding to IN1 of motor driver
   
-~ IN2 (int, default: 20)
+~ IN2 (int, default: -1)
 
   Gpio Pin number corresponding to IN2 of motor driver  
 
-~ IN3 (int, default: 23)
+~ IN3 (int, default: -1)
 
   Gpio Pin number corresponding to IN3 of motor driver
 
-~ IN4 (int, default: 24)
+~ IN4 (int, default: -1)
 
   Gpio Pin number corresponding to IN4 of motor driver
 
-~ ENA (int, default: 12)
+~ ENA (int, default: -1)
 
   Gpio Pin number corresponding to ENA of motor driver
 
-~ ENB (int, default: 13)
+~ ENB (int, default: -1)
 
   Gpio Pin number corresponding to ENB of motor driver
   

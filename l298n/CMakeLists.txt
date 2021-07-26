@@ -62,3 +62,5 @@ include_directories(
 add_executable(l298n_node src/l298n.cpp)
 add_dependencies(l298n_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(l298n_node ${catkin_LIBRARIES} wiringPi -lrt)
+
+

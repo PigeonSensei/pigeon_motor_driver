@@ -28,11 +28,6 @@ public:
           DoStop();
        }
 
-    struct Switch
-    {
-      int emergency_stop = 0;
-    };
-
     int SetupPin();
 
     int GetROSParam();
@@ -60,6 +55,11 @@ private:
 
   int minimum_motor_command_;
   int maximum_motor_command_;
+
+  struct Switch
+  {
+    int emergency_stop = 0;
+  };
 
   Switch switch_;
 

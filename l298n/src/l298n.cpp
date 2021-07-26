@@ -32,12 +32,12 @@ int L298N::SetupPin()
 int L298N::GetROSParam()
 {
   ros::NodeHandle n("~");
-  n.param<int>("IN1", pin_IN1_, 21);
-  n.param<int>("IN2", pin_IN2_, 20);
-  n.param<int>("IN3", pin_IN3_, 23);
-  n.param<int>("IN4", pin_IN4_, 24);
-  n.param<int>("ENA", pin_ENA_, 12);
-  n.param<int>("ENB", pin_ENB_, 13);
+  n.param<int>("IN1", pin_IN1_, -1);
+  n.param<int>("IN2", pin_IN2_, -1);
+  n.param<int>("IN3", pin_IN3_, -1);
+  n.param<int>("IN4", pin_IN4_, -1);
+  n.param<int>("ENA", pin_ENA_, -1);
+  n.param<int>("ENB", pin_ENB_, -1);
 
   n.param<int>("minimum_motor_command", minimum_motor_command_, 20);
   n.param<int>("maximum_motor_command", maximum_motor_command_, 300);
@@ -142,8 +142,6 @@ int L298N::DoGo(int command_L, int command_R)
     digitalWrite(pin_IN3_,LOW);
     digitalWrite(pin_IN4_,LOW);
   }
-
-  ROS_INFO("command_L : %d , command_R : %d", command_L, command_R);
 
   return 0;
 
