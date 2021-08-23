@@ -21,10 +21,10 @@ roslaunch l298n l298n.launch
 
 ### Subscribed Topics
 
-- motor_command (motor_driver_msgs/MotorCommand)
+- motor_command ([motor_driver_msgs/MotorCommand](https://github.com/PigeonSensei/pigeon_motor_driver/blob/master/motor_driver_msgs/msg/MotorCommand.msg))
 
 ### Services
-- SetMotorDriver (l298n/SetMotorDriver)
+- SetMotorDriver ([l298n/SetMotorDriver](https://github.com/PigeonSensei/pigeon_motor_driver/blob/master/l298n/srv/SetMotorDriver.srv))
 
   -  command
 
