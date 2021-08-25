@@ -8,6 +8,10 @@ This Package is for RaspberryPi
 
 https://youtu.be/YasgEIyAXLs
 
+### Diagram
+
+![l298n_diagram](./diagram/l298n.png)
+
 ### Dependency package
 - [wiringPi](http://wiringpi.com/download-and-install/)
 
