@@ -1,16 +1,25 @@
 <?xml version="1.0"?>
 
 <launch>
+  <arg name="IN1"       default="21"/>
+  <arg name="IN2"       default="20"/>
+  <arg name="IN3"       default="23"/>
+  <arg name="IN4"       default="24"/>
+  <arg name="INA"       default="12"/>
+  <arg name="INB"       default="13"/>
+  <arg name="minimum_motor_command"       default="20"/>
+  <arg name="maximum_motor_command"       default="300"/>
+
   <!-- rusrun l298n l298n_node -->
   <node pkg="l298n" type="l298n_node" name="motor_driver_node" respawn="true" output="log">
-    <param name="IN1" type="int" value="21" />
-    <param name="IN2" type="int" value="20" />
-    <param name="IN3" type="int" value="23" />
-    <param name="IN4" type="int" value="24" />
-    <param name="ENA" type="int" value="12" />
-    <param name="ENB" type="int" value="13" />
-    <param name="minimum_motor_command" type="int" value="20" />
-    <param name="maximum_motor_command" type="int" value="300" />
+    <param name="IN1" type="int" value="$(arg IN1)" />
+    <param name="IN2" type="int" value="$(arg IN2)" />
+    <param name="IN3" type="int" value="$(arg IN3)" />
+    <param name="IN4" type="int" value="$(arg IN4)" />
+    <param name="ENA" type="int" value="$(arg INA)" />
+    <param name="ENB" type="int" value="$(arg INB)" />
+    <param name="minimum_motor_command" type="int" value="$(arg minimum_motor_command)" />
+    <param name="maximum_motor_command" type="int" value="$(arg maximum_motor_command)" />
   </node>
 
 </launch>
